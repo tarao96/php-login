@@ -1,4 +1,5 @@
 <?php
+
 $err_msg = '';
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
@@ -34,7 +35,7 @@ if (isset($_POST['login'])) {
     </head>
     <body>
         <h1>ログイン画面</h1>
-        <form action="" method="POST">
+        <form action="index.php" method="POST">
             <?php if ($err_msg !== null && $err_msg !== '') { echo $err_msg . "<br />"; } ?>
             ユーザ名<input type="text" name="username" value="" /><br />
             パスワード<input type="password" name="password" value="" /><br />

@@ -28,7 +28,7 @@ if (isset($_POST['signin'])) {
     </head>
     <body>
         <h1>新規登録画面</h1>
-        <form action="" method="POST">
+        <form action="signin.php" method="POST">
             ユーザ名<input type="text" name="username" value="" /><br />
             パスワード<input type="password" name="password" value="" /><br />
             <input type="submit" name="signin" value="新規登録">
