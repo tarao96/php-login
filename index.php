@@ -31,7 +31,7 @@ if (isset($_POST['login'])) {
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ログイン画面</title>
+        <title>memo app | ログイン画面</title>
     </head>
     <body>
         <h1>ログイン画面</h1>

@@ -1,0 +1,16 @@
+.container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.card{
+    border: 1px solid black;
+    width: 300px;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+.link-group{
+    display: flex;
+    gap: 20px;
+}
