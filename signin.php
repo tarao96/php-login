@@ -1,13 +1,15 @@
 <?php
 
 if (isset($_POST['signin'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     try {
         $db = new PDO('mysql:host=localhost;dbname=sample', 'keito', 'shitara@1324');
-        $sql = 'insert into users(username, password) values(?, ?)';
+        $sql = 'insert into users(email, password) values(:email, :password)';
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($username, $password));
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':password', $password);
+        $stmt->execute();
         $stmt = null;
         $db = null;
         
@@ -29,9 +31,10 @@ if (isset($_POST['signin'])) {
     <body>
         <h1>新規登録画面</h1>
         <form action="signin.php" method="POST">
-            ユーザ名<input type="text" name="username" value="" /><br />
+            メールアドレス<input type="email" name="email" value="" /><br />
             パスワード<input type="password" name="password" value="" /><br />
             <input type="submit" name="signin" value="新規登録">
         </form>
+        <a href="index.php">ログイン画面へ</a>
     </body>
 </html>

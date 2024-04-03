@@ -1,21 +1,26 @@
 <?php 
+session_start();
+$db = new PDO('mysql:host=localhost;dbname=sample', 'keito', 'shitara@1324');
 
-require('db.php');
-
-try {
-    $memo_id = isset($_GET['id']) ? $_GET['id'] : null;
-    $fetch_sql = 'select id,title,body from memos where id = ' . $memo_id;
-    $update_sql = 'update memos set title = ?, body = ?, update = current_stamp where id = ' . $memo_id;
-
-    $stmt = $db->prepare($fetch_sql);
-    $stmt->execute();
-    $memo = $stmt->fetch();
-
-    $db = null;
-    $stmt = null;
-} catch (PDOException $e) {
-    echo $e->getMessage();
-    exit;
+if (isset($_SESSION['id'])) {
+    try {
+        $memo_id = isset($_GET['id']) ? $_GET['id'] : null;
+        $sql = 'select id,title,body from memos where id = :memo_id';
+    
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':memo_id', $memo_id);
+        $stmt->execute();
+        $memo = $stmt->fetch();
+    
+        $db = null;
+        $stmt = null;
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        exit;
+    }
+} else {
+    echo "ログインしていません<br />";
+    echo '<a href="../index.php">ログイン画面へ</a>';
 }
 
 ?>
@@ -25,10 +30,11 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/edit.css">
+    <link rel="stylesheet" href="../css/edit.css">
     <title>memo app | 編集画面</title>
 </head>
 <body>
+    <?php if (isset($_SESSION['id'])) : ?>
     <div class="container">
         <div class="card">
             <form action="update.php" method="POST">
@@ -48,5 +54,6 @@ try {
             <a href="memo.php">戻る</a>
         </div>
     </div>
+    <?php endif ?>
 </body>
 </html>
