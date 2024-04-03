@@ -35,7 +35,7 @@ if (isset($_SESSION['id'])) {// ログインしているとき
     <?php if (isset($_SESSION['id'])) : ?>
     <h2>メモ一覧</h2>
     <a href="create.php">メモ新規作成</a>
-    <a href="logout.php">ログアウト</a>
+    <a href="../logout.php">ログアウト</a>
     <div class="container">
         <?php foreach ($memos as $memo) : ?>
             <div class="card">
