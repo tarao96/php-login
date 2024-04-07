@@ -3,11 +3,12 @@
 $db = new PDO('mysql:host=localhost;dbname=sample', 'keito', 'shitara@1324');
 
 try {
-    $memo_id = $_POST['memo_id'];
-    $sql = 'delete from memos where id = ?';
+    $memo_id = $_GET['id'];
+    $sql = 'delete from memos where id = :memo_id';
 
     $stmt = $db->prepare($sql);
-    $result = $stmt->execute(array($memo_id));
+    $stmt->bindValue(':memo_id', $memo_id);
+    $result = $stmt->execute();
 
     $db = null;
     $stmt = null;

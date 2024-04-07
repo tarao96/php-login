@@ -49,10 +49,7 @@ if (isset($_SESSION['id'])) {// ログインしているとき
                 </div>
                 <div class="link-group">
                     <a href="edit.php?id=<?php echo $memo['id']; ?>">編集</a>
-                    <form action="delete.php" method="POST">
-                        <input type="hidden" name="memo_id" value="<?php echo $memo['id'] ?>">
-                        <input type="submit" value="削除" />
-                    </form>
+                    <a href="delete.php?id=<?php echo $memo['id']; ?>">削除</a>
                 </div>
             </div>
         <?php endforeach ?>
